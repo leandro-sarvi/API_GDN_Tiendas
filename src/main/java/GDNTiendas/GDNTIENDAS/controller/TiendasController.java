@@ -1,5 +1,6 @@
 package GDNTiendas.GDNTIENDAS.controller;
 
+import GDNTiendas.GDNTIENDAS.dto.NroIpTienda;
 import GDNTiendas.GDNTIENDAS.dto.TiendasDTO;
 import GDNTiendas.GDNTIENDAS.persistence.entity.Tiendas;
 import GDNTiendas.GDNTIENDAS.service.TiendasService;
@@ -26,6 +27,11 @@ public class TiendasController {
     public ResponseEntity<List<Tiendas>> getFindAll(){
         List<Tiendas> tiendasList = this.tiendasService.findAll();
         return ResponseEntity.status(HttpStatus.OK).body(tiendasList);
+    }
+    @GetMapping("/listnrotiendaip")
+    public ResponseEntity<List<NroIpTienda>> listStoreNumberIp(){
+        List<NroIpTienda> nroIpTiendaList = this.tiendasService.listStoreNumberIp();
+        return ResponseEntity.status(HttpStatus.OK).body(nroIpTiendaList);
     }
     @GetMapping("/tienda/{nro_tienda}")
     public ResponseEntity<Tiendas> getFindByNroTienda(@PathVariable("nro_tienda") int nro_tienda){

@@ -1,5 +1,6 @@
 package GDNTiendas.GDNTIENDAS.service;
 
+import GDNTiendas.GDNTIENDAS.dto.NroIpTienda;
 import GDNTiendas.GDNTIENDAS.dto.TiendasDTO;
 import GDNTiendas.GDNTIENDAS.exceptions.TiendaBadRequestException;
 import GDNTiendas.GDNTIENDAS.exceptions.ResourceNotFoundException;
@@ -9,6 +10,7 @@ import GDNTiendas.GDNTIENDAS.persistence.repository.TiendasRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -73,5 +75,14 @@ public class TiendasService {
         tiendaExistente.setProvincia(tiendasDTO.getProvincia());
         tiendaExistente.setDireccion(tiendasDTO.getDireccion());
         return this.tiendasRepository.save(tiendaExistente);
+    }
+    public List<NroIpTienda> listStoreNumberIp(){
+        List<Tiendas> tiendasList = this.tiendasRepository.findAll();
+        List<NroIpTienda> nroIpTiendaList = new ArrayList<>();
+        tiendasList.forEach(tienda -> {
+            NroIpTienda nroIpTienda = new NroIpTienda(tienda.getNro_tienda(),tienda.getIp_tienda());
+            nroIpTiendaList.add(nroIpTienda);
+        });
+        return nroIpTiendaList;
     }
 }
