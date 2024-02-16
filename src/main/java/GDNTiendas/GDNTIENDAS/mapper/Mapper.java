@@ -6,7 +6,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class Mapper implements  IMapper<TiendasDTO,Tiendas>{
-
     @Override
     public Tiendas map(TiendasDTO in) {
         Tiendas tiendas = new Tiendas();
@@ -17,6 +16,4 @@ public class Mapper implements  IMapper<TiendasDTO,Tiendas>{
         tiendas.setDireccion(in.getDireccion());
         return tiendas;
     }
-
-
 }

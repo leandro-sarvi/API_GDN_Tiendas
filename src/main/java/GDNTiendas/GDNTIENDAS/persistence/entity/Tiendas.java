@@ -15,5 +15,4 @@ public class Tiendas {
     private String tipo;
     private String provincia;
     private String direccion;
-
 }
