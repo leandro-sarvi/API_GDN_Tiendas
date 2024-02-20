@@ -1,11 +1,12 @@
-package GDNTiendas.GDNTIENDAS.mapper;
+package GDNTiendas.GDNTIENDAS.mapper.Impl;
 
 import GDNTiendas.GDNTIENDAS.dto.TiendasDTO;
+import GDNTiendas.GDNTIENDAS.mapper.IMapper;
 import GDNTiendas.GDNTIENDAS.persistence.entity.Tiendas;
 import org.springframework.stereotype.Component;
 
 @Component
-public class Mapper implements  IMapper<TiendasDTO,Tiendas>{
+public class Mapper implements IMapper<TiendasDTO,Tiendas> {
     @Override
     public Tiendas map(TiendasDTO in) {
         Tiendas tiendas = new Tiendas();

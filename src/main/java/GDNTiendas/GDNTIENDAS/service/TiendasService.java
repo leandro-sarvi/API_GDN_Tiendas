@@ -4,13 +4,13 @@ import GDNTiendas.GDNTIENDAS.dto.NroIpTienda;
 import GDNTiendas.GDNTIENDAS.dto.TiendasDTO;
 import GDNTiendas.GDNTIENDAS.exceptions.TiendaBadRequestException;
 import GDNTiendas.GDNTIENDAS.exceptions.ResourceNotFoundException;
-import GDNTiendas.GDNTIENDAS.mapper.Mapper;
+import GDNTiendas.GDNTIENDAS.mapper.Impl.Mapper;
+import GDNTiendas.GDNTIENDAS.mapper.Impl.MapperNroIpTiendaImpl;
 import GDNTiendas.GDNTIENDAS.persistence.entity.Tiendas;
 import GDNTiendas.GDNTIENDAS.persistence.repository.TiendasRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,9 +18,11 @@ import java.util.Optional;
 public class TiendasService {
     private final TiendasRepository tiendasRepository;
     private Mapper mapper;
-    public TiendasService(TiendasRepository tiendasRepository, Mapper mapper){
+    private MapperNroIpTiendaImpl mapperNroIpTiendas;
+    public TiendasService(TiendasRepository tiendasRepository, Mapper mapper, MapperNroIpTiendaImpl mapperNroIpTiendas){
         this.tiendasRepository = tiendasRepository;
         this.mapper = mapper;
+        this.mapperNroIpTiendas = mapperNroIpTiendas;
     }
     public Optional<Tiendas> findById(Long id){
         Optional<Tiendas> tienda = this.tiendasRepository.findById(id);
@@ -78,11 +80,8 @@ public class TiendasService {
     }
     public List<NroIpTienda> listStoreNumberIp(){
         List<Tiendas> tiendasList = this.tiendasRepository.findAll();
-        List<NroIpTienda> nroIpTiendaList = new ArrayList<>();
-        tiendasList.forEach(tienda -> {
-            NroIpTienda nroIpTienda = new NroIpTienda(tienda.getNro_tienda(),tienda.getIp_tienda());
-            nroIpTiendaList.add(nroIpTienda);
-        });
+        List<NroIpTienda> nroIpTiendaList = this.mapperNroIpTiendas.mapNroIpTienda(tiendasList);
         return nroIpTiendaList;
     }
+
 }
