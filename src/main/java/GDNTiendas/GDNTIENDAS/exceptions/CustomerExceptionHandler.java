@@ -13,7 +13,7 @@ lo que indica a Spring que esta clase manejará excepciones para todos los contr
 */
 public class CustomerExceptionHandler extends ResponseEntityExceptionHandler {
    /*
-    Usamos @ExceptionHandler para indicar que el método handleTaskExceptions manejará excepciones de tipo NotFoundExceptions.
+    Usamos @ExceptionHandler para indicar que el método handleNotFoundExceptions manejará excepciones de tipo NotFoundExceptions.
     */
     @ExceptionHandler(value = {ResourceNotFoundException.class})
     protected ResponseEntity<Object> handleNotFoundExceptions(ResourceNotFoundException ex, WebRequest request){
